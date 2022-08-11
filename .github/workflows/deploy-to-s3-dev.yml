@@ -20,14 +20,14 @@ jobs:
       #     SOME_API_KEY: ${{}}
       #     SECRET_KEY: ${{ secrets.SECRET_KEY }}
       #     file_name: .env.dev
-      - name: Extract version
-        id: extract_version
-        uses: Saionaro/extract-package-version@v1.1.1
-        with:
-          path: mysubdir
+      # - name: Extract version
+      #   id: extract_version
+      #   uses: Saionaro/extract-package-version@v1.1.1
+      #   with:
+      #     path: mysubdir
 
-      - name: Print version
-        run: echo ${{ steps.extract_version.outputs.version }}
+      # - name: Print version
+      #   run: echo ${{ steps.extract_version.outputs.version }}
 
       - name: Set outputs
         id: vars
