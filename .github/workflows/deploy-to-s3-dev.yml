@@ -1,5 +1,5 @@
 on:
-  push:
+  pull_request:
     branches: [development]
 
 name: DEV Deploy to S3
@@ -19,7 +19,8 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  deploy:
+
+deploy:
     if: ${{ github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
     environment: dev
