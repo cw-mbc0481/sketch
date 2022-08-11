@@ -28,4 +28,4 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build:stg
+        run: npm run build:env 'stg'
