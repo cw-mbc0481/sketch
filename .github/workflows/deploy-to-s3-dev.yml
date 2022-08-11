@@ -1,12 +1,13 @@
 on:
   pull_request:
     branches: [development]
+    types: [closed]
 
 name: DEV Deploy to S3
 
 jobs:
   deploy:
-    if: ${{ github.event.pull_request.merged == true }}
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment: dev
 
