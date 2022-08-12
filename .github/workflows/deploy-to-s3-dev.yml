@@ -12,23 +12,6 @@ jobs:
     environment: dev
 
     steps:
-      # - run: echo "🍏 This job's status is ${{ job.status }}."
-      # - name: Make envfile
-      #   uses: SpicyPizza/create-envfile@v1.3
-      #   with:
-      #     DEBUG: false
-      #     SOME_API_KEY: ${{}}
-      #     SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      #     file_name: .env.dev
-      # - name: Extract version
-      #   id: extract_version
-      #   uses: Saionaro/extract-package-version@v1.1.1
-      #   with:
-      #     path: mysubdir
-
-      # - name: Print version
-      #   run: echo ${{ steps.extract_version.outputs.version }}
-
       - name: Set outputs
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
@@ -41,9 +24,6 @@ jobs:
 
       - name: Install Dependency
         run: npm install
-
-      - name: Version Update
-        run: npm version patch
 
       - name: Build
         run: npm run build:env 'dev'
