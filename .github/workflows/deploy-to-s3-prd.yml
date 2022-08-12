@@ -9,6 +9,9 @@ jobs:
     environment: prd
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
       - name: Set outputs
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
