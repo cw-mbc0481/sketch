@@ -5,6 +5,10 @@ on:
 
 name: DEV Deploy to S3
 
+env:
+  VITE_APP_VERSION: ${{secrets.APP_VERSION}}
+  VITE_APP_SECRET_KEY: ${{secrets.SECRET_KEY}}
+
 jobs:
   deploy:
     if: ${{ github.event.pull_request.merged == true }}
@@ -32,6 +36,9 @@ jobs:
           VITE_APP_VERSION: ${{ secrets.APP_VERSION }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           file_name: .env.dev
+
+      - name: cat envfile
+        run: cat ./.env.dev
 
       - name: Install Dependency
         run: npm install
