@@ -1,6 +1,7 @@
 on:
   pull_request:
     branches: [development]
+    types: [closed]
 
 name: DEV Deploy to S3
 
@@ -24,8 +25,16 @@ jobs:
         with:
           format: YYYYMMDDHHmmss
 
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          DEBUG: false
+          APP_VERSION: ${{ secrets.APP_VERSION }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          file_name: .env.dev
+
       - name: Install Dependency
         run: npm install
 
       - name: Build
-        run: npm run build:dev
+        run: npm run build:env 'dev'
