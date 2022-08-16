@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 
 function App() {
+  console.log("APP_VERSION", import.meta.env.VITE_APP_VERSION);
   return (
     <div className="App">
       <h1>Github action {import.meta.env.VITE_ENV} 테스트입니다.</h1>
