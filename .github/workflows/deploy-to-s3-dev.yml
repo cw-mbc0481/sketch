@@ -35,18 +35,18 @@ jobs:
           DEBUG: false
           VITE_APP_VERSION: ${{ secrets.APP_VERSION }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          VITE_ENV: dev
-          VITE_COWAY_DOMAIN: https://www.coway.dev
-          VITE_CODYRC_DOMAIN: https://codyrc.coway.com
-          VITE_MATCHING_API_URL: https://api.matching.coway.dev/cody/v1
-          VITE_CODYPOOL_API: https://api.matching.coway.dev/codypool/v1
-          VITE_APP_SALES_API_URL: https://api.sales.coway.dev
-          VITE_TMAP_DOMAIN: https://apis.openapi.sk.com
-          VITE_TMAP_KEY: l7xx93e0330a4856492ca0cae50a9394d02f
+          VITE_ENV: ${{ dev }}
+          VITE_COWAY_DOMAIN: ${{ https://www.coway.dev }}
+          VITE_CODYRC_DOMAIN: ${{ https://codyrc.coway.com }}
+          VITE_MATCHING_API_URL: ${{ https://api.matching.coway.dev/cody/v1 }}
+          VITE_CODYPOOL_API: ${{ https://api.matching.coway.dev/codypool/v1 }}
+          VITE_APP_SALES_API_URL: ${{ https://api.sales.coway.dev }}
+          VITE_TMAP_DOMAIN: ${{ https://apis.openapi.sk.com }}
+          VITE_TMAP_KEY: ${{ l7xx93e0330a4856492ca0cae50a9394d02f }}
           # datadogRum config
-          VITE_DATADOG_APP_ID: 35a44275-b689-429e-9bf8-c09739b0da38
-          VITE_DATADOG_CLIENT_TOKEN: pub91c0742bcab92919808298f8d0108c1e
-          VITE_DATADOG_SERVICE_NAME: matching-cody-service
+          VITE_DATADOG_APP_ID: ${{ 35a44275-b689-429e-9bf8-c09739b0da38 }}
+          VITE_DATADOG_CLIENT_TOKEN: ${{ pub91c0742bcab92919808298f8d0108c1e }}
+          VITE_DATADOG_SERVICE_NAME: ${{ matching-cody-service }}
           file_name: .env.dev
 
       - name: cat envfile
