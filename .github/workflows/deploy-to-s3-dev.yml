@@ -1,6 +1,7 @@
 on:
   pull_request:
     branches: [development]
+    types: [closed]
 
 name: DEV Deploy to S3
 
@@ -23,6 +24,29 @@ jobs:
         id: current-time
         with:
           format: YYYYMMDDHHmmss
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_VITE_APP_VERSION: ${{ secrets.APP_VERSION }}
+          envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          envkey_VITE_ENV: dev
+          envkey_VITE_COWAY_DOMAIN: https://www.coway.dev
+          envkey_VITE_CODYRC_DOMAIN: https://codyrc.coway.com
+          envkey_VITE_MATCHING_API_URL: https://api.matching.coway.dev/cody/v1
+          envkey_VITE_CODYPOOL_API: https://api.matching.coway.dev/codypool/v1
+          envkey_VITE_APP_SALES_API_URL: https://api.sales.coway.dev
+          envkey_VITE_TMAP_DOMAIN: https://apis.openapi.sk.com
+          envkey_VITE_TMAP_KEY: l7xx93e0330a4856492ca0cae50a9394d02f
+          directory: ./
+          # datadogRum config
+          envkey_VITE_DATADOG_APP_ID: 35a44275-b689-429e-9bf8-c09739b0da38
+          envkey_VITE_DATADOG_CLIENT_TOKEN: pub91c0742bcab92919808298f8d0108c1e
+          envkey_VITE_DATADOG_SERVICE_NAME: matching-cody-service
+          file_name: .env.dev
+
+      - name: cat envfile
+        run: cat ./.env.dev
 
       - name: Install Dependency
         run: npm install
