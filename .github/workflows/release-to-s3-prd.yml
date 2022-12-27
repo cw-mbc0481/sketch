@@ -1,7 +1,6 @@
 on:
   push:
-    tags:
-      - "v*"
+    branch: [main]
 
 name: Create Release
 
@@ -12,14 +11,21 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
+        env:
+          PACKAGE_VERSION: ${{ steps.package-version.outputs.current-version}}
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          SECRET_KEY: ${{ secrets.SECRET_KEY }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ env.PACKAGE_VERSION }}
+          release_name: Release ${{ env.PACKAGE_VERSION }}
           body: |
             Changes in this Release
             - First Change
