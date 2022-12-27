@@ -1,6 +1,5 @@
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
 
 name: PRD Deploy to S3
 
@@ -22,6 +21,35 @@ jobs:
         id: current-time
         with:
           format: YYYYMMDDHHmmss
+
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Get current time
+        uses: srfrnk/current-time@master
+        id: current-time
+        with:
+          format: YYYYMMDDHHmmss
+
+      - name: Get current package version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.2.3
+
+      - name: Show version number
+        run: echo "${{ steps.package-version.outputs.current-version}}"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.package-version.outputs.current-version}}
+          release_name: Release v${{ steps.package-version.outputs.current-version}}
+          body_path: ./releaseNote.md
+          draft: false
+          prerelease: false
 
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
