@@ -1,6 +1,6 @@
 on:
   push:
-    branch: [main]
+    branches: [main]
 
 name: Create Release
 
@@ -8,16 +8,28 @@ jobs:
   build:
     name: Create Release
     runs-on: ubuntu-latest
+    environment: prd
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
-        env:
-          PACKAGE_VERSION: ${{ steps.package-version.outputs.current-version}}
-        run: echo "${{ steps.package-version.outputs.current-version}}"
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Get current time
+        uses: srfrnk/current-time@master
+        id: current-time
+        with:
+          format: YYYYMMDDHHmmss
+
+      # - name: Get npm version
+      #   id: package-version
+      #   uses: martinbeentjes/npm-get-version-action@main
+      #   env:
+      #     PACKAGE_VERSION: ${{ steps.package-version.outputs.current-version}}
+      #   run: echo "${{ steps.package-version.outputs.current-version}}"
 
       - name: Create Release
         id: create_release
