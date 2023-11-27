@@ -1,7 +1,7 @@
 {
   "name": "sketch",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "prepare": "husky install",
     "format": "prettier --config .prettierrc.js . --write",
