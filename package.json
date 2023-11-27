@@ -2,11 +2,19 @@
   "name": "sketch",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
+    "prepare": "husky install",
+    "format": "prettier --config .prettierrc.js . --write",
+    "lint": "eslint \"**/*.{ts,tsx}\"",
+    "lint:fix": "eslint --fix \"**/*.{ts,tsx}\"",
+    "lint-front": "lint-staged",
     "dev": "vite",
     "dev:env": "vite --mode $1",
+    "build": "tsc && vite build --mode prd",
     "build:env": "tsc && vite build --mode $1",
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:run": "vitest run",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -14,10 +22,27 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@cw-frontend/fe-eslint": "^1.1.0",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
     "@vitejs/plugin-react": "^2.0.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
     "typescript": "^4.6.4",
-    "vite": "^3.0.0"
+    "vite": "^3.0.0",
+    "vitest": "^0.34.6"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix \"**/*.{ts,tsx}\"",
+      "prettier --config .prettierrc.js . --write"
+    ]
   }
 }

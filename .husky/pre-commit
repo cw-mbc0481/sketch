@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo '현재 시간'
+today=$(date)
+echo $today
+
+echo 'prettier 실행'
+npm run format
+
+echo 'lint 실행'
+npm run lint:fix
+
+exit 0
